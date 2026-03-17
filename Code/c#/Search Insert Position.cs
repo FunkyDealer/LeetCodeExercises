@@ -16,3 +16,32 @@ public class Solution {
         return s; //return position where target should be
     }
 }
+
+//Binary search solution
+public class Solution {
+    public int SearchInsert(int[] nums, int target) {        
+        //binary Search
+        int low = 0; //set low
+        int high = nums.Length - 1; //set high
+        int s = 0;
+        while (low <= high) {
+            
+            //calculate mid
+            int mid = low + (high - low) / 2; 
+
+            //return mid if its the target
+            if (nums[mid] == target) return mid;
+    
+            if (nums[mid] > target) {
+                high = mid - 1;
+                s = mid;
+            }
+
+            else if (nums[mid] < target) {
+                low = mid + 1;
+                s = mid + 1;
+            }
+        }
+        return Math.Max(s, 0);
+    }
+}
