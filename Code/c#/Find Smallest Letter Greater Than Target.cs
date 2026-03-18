@@ -3,3 +3,17 @@ You are given an array of characters letters that is sorted in non-decreasing or
 
 Return the smallest character in letters that is lexicographically greater than target. If such a character does not exist, return the first character in letters.
 */
+
+
+public class Solution {
+    public char NextGreatestLetter(char[] letters, char target) {
+                
+        //linear search
+        for (int i = 0; i < letters.Length; i++) {
+
+            if (letters[i] > target) return letters[i];
+        }        
+
+        return letters[0];
+    }
+}
