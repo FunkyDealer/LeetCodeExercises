@@ -1,0 +1,49 @@
+/*
+Given the root of a Binary Search Tree (BST), convert it to a Greater Tree such that every key of the original BST is changed to the original key plus the sum of all keys greater than the original key in BST.
+
+As a reminder, a binary search tree is a tree that satisfies these constraints:
+
+    The left subtree of a node contains only nodes with keys less than the node's key.
+    The right subtree of a node contains only nodes with keys greater than the node's key.
+    Both the left and right subtrees must also be binary search trees.
+
+*/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+public class Solution {
+    public TreeNode BstToGst(TreeNode root)
+    {      
+        int sum = 0;
+        InOrderTraversalSwapped(root, ref sum);
+
+        return root;
+    }
+
+    //traverse the tree with InOrderTraversal, but swapped
+    //meaning that we start at the bottom right, instead of bottom left
+    void InOrderTraversalSwapped(TreeNode node, ref int sum) {
+        if (node == null) return;
+
+        //go left
+        InOrderTraversalSwapped(node.right, ref sum);
+
+        //add nodel to sum
+        sum += node.val;
+        node.val = sum; //set that node to sum
+
+        //go right
+        InOrderTraversalSwapped(node.left, ref sum);
+    }
+}
